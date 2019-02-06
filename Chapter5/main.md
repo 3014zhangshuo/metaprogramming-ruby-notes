@@ -1,4 +1,4 @@
-# Chapter 3 Class Definitions
+# Chapter 5 Class Definitions
 
 ## The Current Class
 
@@ -6,7 +6,7 @@
 * 在一个方法中，当前类就是当前对象的类。
 * 当用`class`关键字打开一个类时，那个类成为当前类。
 
-## class_eval
+### class_eval
 ```
 def add_method_to(a_class)
   a_class.class_eval do
@@ -22,10 +22,11 @@ add_method_to String
 * 如果希望是打开一个对象，但不关心它是不是一个类，那么`instance_eval`就很好。
 * 如果你想使用打开类的技巧修改类，那么 `class_eval`方法显然是更好的选择。
 
-## class instance variables
-ruby 解释器假定所有的实例变量都属于当前对象 `self`
+### class instance variables
+* ruby 解释器假定所有的实例变量都属于当前对象 `self`。
+* 一个类实例变量只可以被类本身所访问，而不能被类的实例或者子类所访问。
 
-## Class Taboo
+### Class Taboo
 > 不使用`class`关键字，完成下面代码相同的功能
 
 Q:
@@ -50,6 +51,9 @@ MyClass = c
 ```
 当你把匿名类的赋值给一个常量时，ruby知道你是想给这个类命名，它会对类说这是你的新名字，这个常量就表示这个Class，同时这个Class也就表示这个常量。
 
+## Singleton Methods
+* Class Method is Singleton Method
+
 ## Singleton Class
 * ruby 方法的查找方法时先向右一步进入接受者的类，然后向上查找。
   ```
@@ -72,6 +76,7 @@ MyClass = c
   end
 
   singleton_class.class # => Class
+  obj.singleton_class 
   ```
 * 每个单件类只有一个实例，单件类是对象的单件方法储存之处。
 
